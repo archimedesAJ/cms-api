@@ -1,26 +1,26 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
+from .models import Visitor
+from .serializers import VisitorSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .serializers import SundaySchoolSerializer
-from .models import SundaySchool
-from datetime import date
+
 
 # Create your views here.
-class SundaySchoolViewSet(viewsets.ModelViewSet):
-    queryset = SundaySchool.objects.all()
-    serializer_class = SundaySchoolSerializer
+class VisitorViewSet(viewsets.ModelViewSet):
+    queryset = Visitor.objects.all()
+    serializer_class = VisitorSerializer
 
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True) #validate the data
-        self.perform_create(serializer) #save the new student
+        self.perform_create(serializer) #save the new visitor
         headers = self.get_success_headers(serializer.data)
 
         #Custom response with status code and success message
         return Response({
-            'message': 'Sunday School student added successfully',
+            'message': 'Visitor added successfully',
             'data': serializer.data
         },status=status.HTTP_201_CREATED, headers=headers)
     
@@ -36,10 +36,11 @@ class SundaySchoolViewSet(viewsets.ModelViewSet):
 
         #Return custom response with success message
         return Response({
-            'message': 'Sunday School student updated successfully',
+            'message': 'Visitor updated successfully',
             'data': serializer.data
         }, status=status.HTTP_200_OK, headers=headers)
     
+
     
     #delete member record
     def destroy(self, request, *args, **kwargs):
@@ -48,11 +49,9 @@ class SundaySchoolViewSet(viewsets.ModelViewSet):
 
         #Custom response with sucess message
         return Response({
-            'message': 'Sunday School student deleted successfully',
+            'message': 'Visitor deleted successfully',
         
         }, status=status.HTTP_204_NO_CONTENT)
-
-
 
     def get_queryset(self):
         queryset =  super().get_queryset()
@@ -84,12 +83,3 @@ class SundaySchoolViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
     
-
-    #Get birthday
-    @action(detail=False, methods=['get'])
-    def birthdays_today(self, request):
-        today = date.today()
-        print(today)
-        members_with_birthday_today = self.queryset.filter(birthday__month=today.month, birthday__day=today.day)
-        serializer = self.get_serializer(members_with_birthday_today, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)

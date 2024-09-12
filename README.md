@@ -1,2 +1,2 @@
 # cms-api
-This repo contains apis for church management system
+This repo contains REST API for church management system

@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from .serializers import MemberSerializer
 from .models import Member
 from datetime import date
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here. (This end point used to get info about members)
 class MemberViewSet(viewsets.ModelViewSet):
@@ -93,5 +94,3 @@ class MemberViewSet(viewsets.ModelViewSet):
         members_with_birthday_today = self.queryset.filter(birthday__month=today.month, birthday__day=today.day)
         serializer = self.get_serializer(members_with_birthday_today, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-

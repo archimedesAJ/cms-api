@@ -6,12 +6,15 @@ from .serializers import MemberSerializer
 from .models import Member
 from datetime import date
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Create your views here. (This end point used to get info about members)
 class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
     # pagination_class = PageNumberPagination  # Optional if set globally in settings.py
+    authentication_classes = [JWTAuthentication]  # Add JWT authentication
+    permission_classes = [IsAuthenticated]  # Require authentication for all actions
 
 
     def create(self, request, *args, **kwargs):
@@ -28,7 +31,7 @@ class MemberViewSet(viewsets.ModelViewSet):
     
 
     #update member record
-    def udpate(self, request, *args, **kwargs):
+    def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
@@ -76,7 +79,7 @@ class MemberViewSet(viewsets.ModelViewSet):
     
 
     @action(detail=False, methods=['get'])
-    def males(self):
+    def females(self):
         queryset = self.get_queryset().filter(gender='female')
         page = self.paginate_queryset(queryset)
         if page is not None:

@@ -22,6 +22,7 @@ urlpatterns = [
     path('members/', include("member.urls")),
     path('sundayschool/', include("sundayschool.urls")),
     path('visitors/', include("visitor.urls")),
+    path('', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('schema/', SpectacularAPIView.as_view(), name="schema"),
     path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs')

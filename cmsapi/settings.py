@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-f70$0dz4_%z8boj7f$iwkrj7r66mph=n#$^sfu1%ed2$k7^rj-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.ngrok-free.app', '127.0.0.1']
 
 
 # Application definition
@@ -33,10 +34,12 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'drf_spectacular',
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',  # Add JWT
+    'rest_framework_simplejwt.token_blacklist',
     'member',
     'sundayschool',
     'visitor',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,12 +52,19 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,  # Adjust the page size as needed
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # Enable JWT
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Access token expires in 5 minutes
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Refresh token expires in 7 days
+    'ROTATE_REFRESH_TOKENS': True,  # Issue a new refresh token on each refresh
+    'BLACKLIST_AFTER_ROTATION': True,  # Blacklist the old refresh token after rotation
 }
 
 MIDDLEWARE = [
@@ -86,6 +96,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cmsapi.wsgi.application'
+
+## This tells django to use the custom user model
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 # Database

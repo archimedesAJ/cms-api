@@ -9,5 +9,5 @@ router.register(r'', MemberViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('birthdays_today/', MemberViewSet.as_view({'get':'birthdays_today'}), name='members-birthdays-today'),
+    path('birthdays_today', MemberViewSet.as_view({'get':'birthdays_today'}), name='members-birthdays-today'),
 ]

@@ -8,5 +8,5 @@ router.register(r'', SundaySchoolViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('birthdays_today/', SundaySchoolViewSet.as_view({'get':'birthdays_today'}), name='sundayschool-birthdays-today'),
+    path('birthdays_today', SundaySchoolViewSet.as_view({'get':'birthdays_today'}), name='sundayschool-birthdays-today'),
 ]

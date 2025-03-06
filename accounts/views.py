@@ -7,6 +7,8 @@ from rest_framework_simplejwt.exceptions import TokenError
 from .serializers import LoginSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from .serializers import UserProfileSerializer
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -59,3 +61,13 @@ class LogoutView(APIView):
             return Response({"message": "Logout successful."}, status=status.HTTP_200_OK)
         except TokenError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class ProfileView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user  # Get the authenticated user
+        serializer = UserProfileSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)

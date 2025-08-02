@@ -34,34 +34,25 @@ class LoginView(APIView):
 class LogoutView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
-    def post(self, request):
 
+    def post(self, request):
         logger.info(f"Request data: {request.data}")  # Log the request data
+
         try:
             # Get the refresh token from the request body
             refresh_token = request.data.get('refresh')
-            redata = request.data
-
-            print(redata)
-
             if not refresh_token:
                 return Response({"error": "Refresh token is required."}, status=status.HTTP_400_BAD_REQUEST)
 
             # Blacklist the refresh token
-            token = RefreshToken(refresh_token)
-            token.blacklist()
-
-
-            # Blacklist the access token
-            access_token = request.auth  # Get the access token from the request
-            if access_token:
-                access_token = RefreshToken(access_token)
-                access_token.blacklist()
+            refresh_token_obj = RefreshToken(refresh_token)
+            refresh_token_obj.blacklist()
+            logger.info("Refresh token blacklisted.")
 
             return Response({"message": "Logout successful."}, status=status.HTTP_200_OK)
         except TokenError as e:
+            logger.error(f"Token error: {e}")
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
 
 class ProfileView(APIView):
     authentication_classes = [JWTAuthentication]

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-f70$0dz4_%z8boj7f$iwkrj7r66mph=n#$^sfu1%ed2$k7^rj-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.ngrok-free.app', '127.0.0.1']
+ALLOWED_HOSTS = ['abbeydev.pythonanywhere.com']
 
 
 # Application definition
@@ -83,10 +83,7 @@ MIDDLEWARE = [
     
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Your frontend URL
-    "https://5c0e-41-155-27-235.ngrok-free.app",  # Your backend URL (if needed)
-]
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'cmsapi.urls'
 
@@ -118,10 +115,10 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cms_db',
-        'USER': 'root',
+        'NAME': 'abbeydev$cms_db',
+        'USER': 'abbeydev',
         'PASSWORD': '48suma@ASU',
-        'HOST': '127.0.0.1',
+        'HOST': 'abbeydev.mysql.pythonanywhere-services.com',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
     }
@@ -165,7 +162,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STORAGES = {
+<<<<<<< HEAD
     # ...
+=======
+>>>>>>> main
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },

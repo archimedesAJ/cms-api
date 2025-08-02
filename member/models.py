@@ -1,6 +1,8 @@
 from django.db import models
 import random
 import string
+import cloudinary.uploader
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Member(models.Model):
@@ -16,12 +18,13 @@ class Member(models.Model):
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
     birthday = models.DateField()
     contact_no = models.CharField(max_length=11)
-    image = models.ImageField(upload_to='photos/members_photo/', blank=True, null=True)
+    # image = models.ImageField(upload_to='photos/members_photo/', blank=True, null=True)
+    image = CloudinaryField("image", blank=True, null=True)
+
     location = models.CharField(max_length=100)
     committee = models.CharField(max_length=50)
     department = models.CharField(max_length=100)
     designation = models.CharField(max_length=20)
-
 
     def save(self, *args, **kwargs):
         if not self.member_no:
@@ -36,3 +39,9 @@ class Member(models.Model):
 
     def __str__(self):
         return self.full_name
+    
+    @property
+    def image_url(self):
+        return (
+            f"https://res.cloudinary.com/dgfpnzr5k/{self.image}"
+        )

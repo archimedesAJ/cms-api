@@ -42,6 +42,6 @@ class Member(models.Model):
     
     @property
     def image_url(self):
-        return (
-            f"https://res.cloudinary.com/dgfpnzr5k/{self.image}"
-        )
+        if self.image:
+            return self.image.url  # safest and preferred way with CloudinaryField
+        return None

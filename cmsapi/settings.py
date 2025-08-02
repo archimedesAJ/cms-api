@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-f70$0dz4_%z8boj7f$iwkrj7r66mph=n#$^sfu1%ed2$k7^rj-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['abbeydev.pythonanywhere.com']
+ALLOWED_HOSTS = ['abbeydev.pythonanywhere.com','127.0.0.1' ]
 
 
 # Application definition
@@ -112,13 +112,16 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Import dj-database-url at the beginning of the file.
+import dj_database_url 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'abbeydev$cms_db',
-        'USER': 'abbeydev',
+        'NAME': 'cms_db',
+        'USER': 'root',
         'PASSWORD': '48suma@ASU',
-        'HOST': 'abbeydev.mysql.pythonanywhere-services.com',
+        'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
     }
@@ -171,7 +174,8 @@ STORAGES = {
     },
 }
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR/'assets'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

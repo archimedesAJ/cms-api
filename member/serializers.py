@@ -7,5 +7,5 @@ class MemberSerializer(serializers.ModelSerializer):
         model = Member
         fields = ['id', 'member_no', 'title', 'full_name',
                   'email', 'gender', 'birthday', 'contact_no', 'image',
-                  'location', 'committee', 'department', 'designation', 'image_url'] 
+                  'location', 'committee', 'department', 'designation'] 
         

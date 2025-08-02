@@ -162,10 +162,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STORAGES = {
-<<<<<<< HEAD
     # ...
-=======
->>>>>>> main
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },

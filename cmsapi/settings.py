@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',  # Add JWT
     'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
+    'tithe',
     'member',
     'sundayschool',
     'visitor',
@@ -62,7 +64,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Access token expires in 5 minutes
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Access token expires in 5 minutes
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Refresh token expires in 7 days
     'ROTATE_REFRESH_TOKENS': True,  # Issue a new refresh token on each refresh
     'BLACKLIST_AFTER_ROTATION': True,  # Blacklist the old refresh token after rotation

@@ -185,6 +185,10 @@ STORAGES = {
     },
 }
 
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticCloudinaryStorage'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

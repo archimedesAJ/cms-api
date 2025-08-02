@@ -116,15 +116,11 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 import dj_database_url 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cms_db',
-        'USER': 'root',
-        'PASSWORD': '48suma@ASU',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://abrahamabbey:postgres@localhost:5432/cms_db',
+        conn_max_age=600
+    )
 }
 
 
@@ -162,7 +158,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STORAGES = {
     # ...
@@ -175,7 +171,7 @@ STORAGES = {
 }
 
 # STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_ROOT = BASE_DIR/'assets'
+STATIC_ROOT = BASE_DIR/'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

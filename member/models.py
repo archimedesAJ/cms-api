@@ -16,7 +16,7 @@ class Member(models.Model):
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
     birthday = models.DateField()
     contact_no = models.CharField(max_length=11)
-    image = models.ImageField(upload_to='photos/members_photo/', blank=True)
+    image = models.ImageField(upload_to='photos/members_photo/', blank=True, null=True)
     location = models.CharField(max_length=100)
     committee = models.CharField(max_length=50)
     department = models.CharField(max_length=100)

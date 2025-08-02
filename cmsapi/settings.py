@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',  # Add JWT
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
+    'cloudinary',
+    'cloudinary_storage',
     'tithe',
     'member',
     'sundayschool',
@@ -64,7 +70,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Access token expires in 5 minutes
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Access token expires in 5 minutes
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Refresh token expires in 7 days
     'ROTATE_REFRESH_TOKENS': True,  # Issue a new refresh token on each refresh
     'BLACKLIST_AFTER_ROTATION': True,  # Blacklist the old refresh token after rotation
@@ -123,6 +129,15 @@ DATABASES = {
     )
 }
 
+# Cloudinary settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),      # replace with your cloud name
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),            # replace with your API key
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),      # replace with your API secret
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -171,7 +186,7 @@ STORAGES = {
 }
 
 # STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_ROOT = BASE_DIR/'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

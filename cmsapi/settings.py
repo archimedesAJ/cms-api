@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-f70$0dz4_%z8boj7f$iwkrj7r66mph=n#$^sfu1%ed2$k7^rj-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['abbeydev.pythonanywhere.com','127.0.0.1', 'localhost:8000' ]
+ALLOWED_HOSTS = ['cms-api-pmb7.onrender.com']
 
 
 # Application definition

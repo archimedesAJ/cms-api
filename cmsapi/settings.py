@@ -115,10 +115,10 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'abbeydev$cms_db',
-        'USER': 'abbeydev',
+        'NAME': 'cms_db',
+        'USER': 'root',
         'PASSWORD': '48suma@ASU',
-        'HOST': 'abbeydev.mysql.pythonanywhere-services.com',
+        'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
     }

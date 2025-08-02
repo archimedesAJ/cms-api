@@ -169,7 +169,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # Static files settings
 STATIC_URL = 'static/'
-STATIC_ROOT = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Use Cloudinary for media files storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

@@ -17,8 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('members/', include("member.urls")),
@@ -31,6 +29,3 @@ urlpatterns = [
     path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs')
    
 ]
-
-# Serve media files in production (important for Render)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

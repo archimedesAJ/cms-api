@@ -136,8 +136,6 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),      # replace with your API secret
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -174,19 +172,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# STORAGES = {
-#     # ...
-#     "default": {
-#         "BACKEND": "django.core.files.storage.FileSystemStorage",
-#     },
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
-
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticCloudinaryStorage'
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -199,5 +185,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #media files configurations
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR /'media'

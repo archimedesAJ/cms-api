@@ -175,15 +175,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STORAGES = {
-    # ...
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+# STORAGES = {
+#     # ...
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#     },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticCloudinaryStorage'
 

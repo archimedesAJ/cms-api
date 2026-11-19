@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-f70$0dz4_%z8boj7f$iwkrj7r66mph=n#$^sfu1%ed2$k7^rj-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cms-api-pmb7.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = ['cms-api-pmb7.onrender.com', '127.0.0.1', '*']
 
 # Application definition
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',  # Add this line - to allow frontend to make request to the api
     'cloudinary',
     'cloudinary_storage',
+    'bulksms',
 ]
 
 REST_FRAMEWORK = {
@@ -122,20 +123,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 import dj_database_url 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://abrahamabbey:postgres@localhost:5432/cms_db',
-        conn_max_age=600
-    )
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'cms_db',
-    #     'USER': 'root',
-    #     'PASSWORD': '48suma@ASU',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306',
-    #     'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
-    # }
+    'default': dj_database_url.config(conn_max_age=600)
 }
 
 # Password validation
@@ -180,6 +168,10 @@ cloudinary.config(
     api_key=os.environ.get("CLOUDINARY_API_KEY"),
     api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
 )
+
+#Arkesel SMS API Credentials
+ARK_API_KEY = os.environ.get('ARK_API_KEY')
+ARK_SENDER_ID = os.environ.get("ARK_SENDER_ID", "LF Intl Min")
 
 # Static files (CSS, JavaScript, Images)
 # Static files settings
